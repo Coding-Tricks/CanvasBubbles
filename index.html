@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Animation</title>
+    <style>
+        *{
+        margin: 0;
+        padding: 0;
+        
+    }
+    body{
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #canvas{
+        background: black;
+    }
+    
+    
+   </style>
+</head>
+<body>
+    <canvas id="canvas" width="360" height="640"></canvas>
+
+
+    <script>
+
+function color() {
+            str='0123456789abcdef';
+            c1=Math.floor(Math.random()*15);
+            c2=Math.floor(Math.random()*15);
+            c3=Math.floor(Math.random()*15);
+            c4=Math.floor(Math.random()*15);
+            c5=Math.floor(Math.random()*15);
+            c6=Math.floor(Math.random()*15);
+            col="#"+str[c1]+str[c2]+str[c3]+str[c4]+str[c5]+str[c6];
+            
+            return col;
+        }
+         canvas=document.getElementById('canvas');
+         context=canvas.getContext('2d');
+         x=180;
+         y=320;
+         r=20;
+         i=0;
+
+         function animation() {
+            context.strokeColor=color();
+             context.shadowColor=context.strokeColor;
+             context.shadowBlur= 3;
+             repeats=10;
+             for(var j=0;j<repeats;j++){
+
+                     context.shadowBlur+=0.5;
+                     context.beginPath();
+                      context.arc(x,y,r,0,2*Math.PI);
+                    context.fill();
+
+                   }
+            
+             context.closePath();
+             x= 10+Math.floor(Math.random()*340);
+             y= 10+Math.floor(Math.random()*640);
+             r= 5+Math.floor(Math.random()*20);
+             i++;
+             if(i>=75){
+                 context.clearRect(0,0,360,640);
+                 i=0;
+             }
+             setTimeout(animation,100);
+         }
+        setTimeout(animation,1000);
+        
+    </script>
+
+</body>
+</html>
